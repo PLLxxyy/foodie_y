@@ -80,8 +80,6 @@ public class PassportController {
 
   }
 
-
-
   @ApiOperation(value = "用户登录",notes = "用户登录",httpMethod = "POST")
   @PostMapping("/login")
   public IMOOCJSONResult login(@RequestBody UserBO userBO,
