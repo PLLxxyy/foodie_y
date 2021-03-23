@@ -18,30 +18,28 @@ import tk.mybatis.mapper.entity.Example;
 @Service
 public class UserServiceImpl implements UserService {
 
-  @Autowired
-  private UsersMapper usersMapper;
-  @Autowired
-  private Sid sid;
+  @Autowired private UsersMapper usersMapper;
+  @Autowired private Sid sid;
 
   public static final String USER_FACE = "C:/Users/blueship/Desktop";
 
   @Transactional(propagation = Propagation.SUPPORTS)
   @Override
   public boolean queryUsernameIsExist(String username) {
-    Example example=new Example(Users.class);
-    Example.Criteria userCriteria=example.createCriteria();
-    userCriteria.andEqualTo("username",username);
-    Users res=usersMapper.selectOneByExample(example);
+    Example example = new Example(Users.class);
+    Example.Criteria userCriteria = example.createCriteria();
+    userCriteria.andEqualTo("username", username);
+    Users res = usersMapper.selectOneByExample(example);
 
-    return res== null?false:true;
+    return res != null;
   }
 
   @Transactional(propagation = Propagation.REQUIRED)
   @Override
   public Users createUser(UserBO userBO) {
 
-    String userId=sid.nextShort();
-    Users user=new Users();
+    String userId = sid.nextShort();
+    Users user = new Users();
     user.setId(userId);
     user.setUsername(userBO.getUsername());
     try {
@@ -49,11 +47,11 @@ public class UserServiceImpl implements UserService {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    //默认昵称和用户名一样
+    // 默认昵称和用户名一样
     user.setNickname(userBO.getUsername());
-    //头像
+    // 头像
     user.setFace(USER_FACE);
-    //设置默认生日
+    // 设置默认生日
     user.setBirthday(DateUtil.stringToDate("1993-01-01"));
     user.setSex(Sex.secret.type);
     user.setCreatedTime(new Date());
@@ -66,11 +64,10 @@ public class UserServiceImpl implements UserService {
   @Transactional(propagation = Propagation.SUPPORTS)
   @Override
   public Users queryUserForLogin(String username, String password) {
-    Example userExample=new Example(Users.class);
-    Example.Criteria userCriteria=userExample.createCriteria();
-    userCriteria.andEqualTo("username",username);
-    userCriteria.andEqualTo("password",password);
-    Users u=usersMapper.selectOneByExample(userExample);
-    return u;
+    Example userExample = new Example(Users.class);
+    Example.Criteria userCriteria = userExample.createCriteria();
+    userCriteria.andEqualTo("username", username);
+    userCriteria.andEqualTo("password", password);
+    return usersMapper.selectOneByExample(userExample);
   }
 }

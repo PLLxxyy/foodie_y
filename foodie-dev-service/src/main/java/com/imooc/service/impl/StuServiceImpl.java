@@ -11,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StuServiceImpl implements StuService {
 
-  @Autowired
-  private StuMapper stuMapper;
-
+  @Autowired private StuMapper stuMapper;
 
   @Transactional(propagation = Propagation.SUPPORTS)
   @Override
@@ -24,7 +22,7 @@ public class StuServiceImpl implements StuService {
   @Transactional(propagation = Propagation.REQUIRED)
   @Override
   public void saveStu() {
-    Stu stu=new Stu();
+    Stu stu = new Stu();
     stu.setAge(18);
     stu.setName("lxy");
     stuMapper.insert(stu);
@@ -33,7 +31,7 @@ public class StuServiceImpl implements StuService {
   @Transactional(propagation = Propagation.REQUIRED)
   @Override
   public void updateStu(int id) {
-    Stu stu=new Stu();
+    Stu stu = new Stu();
     stu.setId(id);
     stu.setAge(19);
     stu.setName("parent");

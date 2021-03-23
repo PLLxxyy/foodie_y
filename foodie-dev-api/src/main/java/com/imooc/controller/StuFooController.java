@@ -11,8 +11,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 public class StuFooController {
 
-  @Autowired
-  private StuService stuService;
+  @Autowired private StuService stuService;
 
   @GetMapping("/getStu")
   public Object getStu(int id) {
