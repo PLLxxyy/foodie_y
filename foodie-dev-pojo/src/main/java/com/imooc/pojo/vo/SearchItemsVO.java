@@ -11,6 +11,7 @@ public class SearchItemsVO {
     private String itemName;
     private int sellCounts;
     private String imgUrl;
+    //价格是int以分为单位
     private int price;
 
     public String getItemId() {

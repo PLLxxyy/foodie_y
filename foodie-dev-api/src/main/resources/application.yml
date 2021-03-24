@@ -41,3 +41,8 @@ mapper:
   #判断某个数据是否为空，操作数据库时判断是username!=null,是否追加username !=''
   not-empty: false
   identity: MYSQL
+#分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  support-methods-arguments: true
+
