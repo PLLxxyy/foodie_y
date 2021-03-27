@@ -32,4 +32,9 @@ public interface AddressService {
    * 根据用户id和地址id设置默认地址
    * */
   public void updateUserAddressToBeDefault(String userId, String addressId);
+
+  /*
+   * 根据用户id和地址id,查询具体的用户对象信息
+   * */
+  public UserAddress queryUserAddress(String userId, String addressId);
 }

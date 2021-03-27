@@ -3,6 +3,7 @@ package com.imooc.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.imooc.enums.CommentLevel;
+import com.imooc.enums.YesOrNo;
 import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.mapper.ItemsImgMapper;
 import com.imooc.mapper.ItemsMapper;
@@ -164,6 +165,37 @@ public class ItemServiceImpl implements ItemService {
     List<String> specIdsList =new ArrayList<>();
     Collections.addAll(specIdsList,ids);
    return itemsMapperCustom.queryItemsBySpecIds(specIdsList);
+  }
+  @Transactional(propagation = Propagation.SUPPORTS)
+  @Override
+  public ItemsSpec queryItemsBySpecId(String specId) {
+    return itemsSpecMapper.selectByPrimaryKey(specId);
+  }
+
+  @Transactional(propagation = Propagation.SUPPORTS)
+  @Override
+  public String queryItemMainImgById(String itemId) {
+    ItemsImg itemsImg=new ItemsImg();
+    itemsImg.setId(itemId);
+    itemsImg.setIsMain(YesOrNo.YES.type);
+    ItemsImg result=itemsImgMapper.selectOne(itemsImg);
+    return result !=null?result.getUrl():"";
+  }
+
+  @Transactional(propagation = Propagation.REQUIRED)
+  @Override
+  public void decreaseItemSpecStock(String specId, int buyCounts) {
+    //查询库存，库存是公共资源，多线程，
+    // 如果加同步关键字，影响效率，单体应用可这么做，集群就不管用
+    //锁数据表更不不能做,单体做乐观锁
+    //*****分布式锁，redis和zookepper*****
+    //判断库存，是否能减少到0以下
+   int res= itemsMapperCustom.decreaseItemSpecStock(specId,buyCounts);
+   if(res !=1){
+     //更新失败,事务回滚
+     throw new RuntimeException("订单创建失败，原因：库存不足！");
+   }
+
   }
 
   /*分页方法*/

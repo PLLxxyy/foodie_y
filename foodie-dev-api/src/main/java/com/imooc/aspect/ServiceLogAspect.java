@@ -43,11 +43,11 @@ public class ServiceLogAspect {
     long endTime = System.currentTimeMillis();
     long takeTime = endTime - beginTime;
     if (takeTime > 3000) {
-      log.error("====执行结束，耗时：{}毫秒 ====", takeTime);
+      //log.error("====执行结束，耗时：{}毫秒 ====", takeTime);
     } else if (takeTime > 2000) {
-      log.warn("====执行结束，耗时：{}毫秒 ====", takeTime);
+      //log.warn("====执行结束，耗时：{}毫秒 ====", takeTime);
     } else {
-      log.info("====执行结束，耗时：{}毫秒 ====", takeTime);
+     // log.info("====执行结束，耗时：{}毫秒 ====", takeTime);
     }
     return result;
   }

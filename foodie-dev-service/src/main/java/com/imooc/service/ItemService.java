@@ -58,6 +58,16 @@ public interface ItemService {
   * 用于刷新渲染购物车中的商品数据）
   * */
   public List<ShopcartVO> queryItemsBySpecIds(String specIds);
+  /*
+   * 根据商品规格id获取具体规格信息
+   * */
+  public ItemsSpec queryItemsBySpecId(String specId);
 
+  /*
+   * 根据商品id获取商品主图url
+   * */
+  public String queryItemMainImgById(String itemId);
 
+  //用户提交订单后，对应商品库存减少
+  public void decreaseItemSpecStock(String specId,int buyCounts);
 }
