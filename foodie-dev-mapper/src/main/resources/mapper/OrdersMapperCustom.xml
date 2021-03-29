@@ -12,10 +12,7 @@
     <result column="orderStatus" property="orderStatus"/>
     <result column="isComment" property="isComment"/>
 
-    <collection property="subOrderItemList"
-      select="getSubItems"
-      column="orderId"
-      ofType="com.imooc.pojo.vo.MySubOrderItemVO">
+    <collection property="subOrderItemList" select="getSubItems" column="orderId" ofType="com.imooc.pojo.vo.MySubOrderItemVO">
       <result column="itemId" property="itemId"/>
       <result column="itemName" property="itemName"/>
       <result column="itemImg" property="itemImg"/>

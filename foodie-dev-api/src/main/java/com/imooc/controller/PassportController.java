@@ -106,6 +106,10 @@ public class PassportController {
 
   private Users setNullProperty(Users user) {
     user.setPassword(null);
+    user.setMobile(null);
+    user.setCreatedTime(null);
+    user.setUpdatedTime(null);
+    user.setBirthday(null);
     user.setEmail(null);
     return user;
   }

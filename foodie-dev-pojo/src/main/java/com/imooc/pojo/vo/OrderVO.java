@@ -13,9 +13,9 @@ public class OrderVO {
         this.orderId = orderId;
     }
 
-    public MerchantOrdersVO getMerchantOrdersVO() {
+   /* public MerchantOrdersVO getMerchantOrdersVO() {
         return merchantOrdersVO;
-    }
+    }*/
 
     public void setMerchantOrdersVO(MerchantOrdersVO merchantOrdersVO) {
         this.merchantOrdersVO = merchantOrdersVO;
