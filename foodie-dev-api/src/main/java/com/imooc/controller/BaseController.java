@@ -1,13 +1,17 @@
 package com.imooc.controller;
 
 
+import com.imooc.pojo.Orders;
+import com.imooc.service.center.MyOrdersService;
+import com.imooc.utils.IMOOCJSONResult;
 import java.io.File;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class BaseController {
 
-  public static final Integer COMMENT_PAGE_SIZE=10;
+  public static final Integer COMMEN_PAGE_SIZE=10;
   public static final Integer PAGE_SIZE=20;
   public static final String FOOD_SHOPCART="shopcart";
   //支付中心调用的地址：
@@ -21,4 +25,17 @@ public class BaseController {
       File.separator + "images" +
       File.separator + "foodie" +
       File.separator + "faces";
+  @Autowired
+  public MyOrdersService myOrdersService;
+
+  /*
+   *用于验证用户和订单是否有关联关系，避免非法用户调用
+   * */
+  public IMOOCJSONResult checkUserOrder(String orderId,String userId){
+    Orders orders=myOrdersService.queryMyOrder(orderId,userId);
+    if(orders ==null){
+      return IMOOCJSONResult.errorMsg("订单不存在");
+    }
+    return IMOOCJSONResult.ok();
+  }
 }

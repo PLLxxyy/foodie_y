@@ -10,27 +10,41 @@
     <result column="realPayAmount" property="realPayAmount"/>
     <result column="postAmount" property="postAmount"/>
     <result column="orderStatus" property="orderStatus"/>
-    <result column="isComment" property="isComment"/>
-
-    <collection property="subOrderItemList" select="getSubItems" column="orderId" ofType="com.imooc.pojo.vo.MySubOrderItemVO">
+    <result column="iisComment" property="isComment"/>
+    <!--column给select传值-->
+    <collection property="subOrderItemList"
+      select ="getSubItems"
+      column="orderId"
+      ofType="com.imooc.pojo.vo.MySubOrderItemVO">
       <result column="itemId" property="itemId"/>
       <result column="itemName" property="itemName"/>
       <result column="itemImg" property="itemImg"/>
-      <result column="itemSpecId" property="itemSpecId"/>
       <result column="itemSpecName" property="itemSpecName"/>
       <result column="buyCounts" property="buyCounts"/>
       <result column="price" property="price"/>
     </collection>
   </resultMap>
 
+  <select id="getSubItems" parameterType="String" resultType="com.imooc.pojo.vo.MySubOrderItemVO">
+    select
+    oi.item_id AS itemId,
+    oi.item_name AS itemName,
+    oi.item_img AS itemImg,
+    oi.item_spec_name AS itemSpecName,
+    oi.buy_counts AS buyCounts,
+    oi.price AS price
+    from order_items oi
+    where oi.order_id=#{orderId}
+  </select>
+
   <select id="queryMyOrders" resultMap="myOrdersVO" parameterType="Map">
     SELECT
-    od.id as orderId,
-    od.created_time as createdTime,
-    od.pay_method as payMethod,
-    od.real_pay_amount as realPayAmount,
-    od.post_amount as postAmount,
-    os.order_status as orderStatus,
+    od.id AS orderId,
+    od.created_time AS createTime,
+    od.pay_method AS payMethod,
+    od.real_pay_amount AS realPayAmount,
+    od.post_amount AS postAmount,
+    os.order_status AS orderStatus,
     od.is_comment as isComment
     FROM
     orders od
@@ -49,45 +63,28 @@
   </select>
 
 
-  <select id="getSubItems" parameterType="String" resultType="com.imooc.pojo.vo.MySubOrderItemVO">
 
-    select
-    oi.item_id as itemId,
-    oi.item_name as itemName,
-    oi.item_img as itemImg,
-    oi.item_spec_name as itemSpecName,
-    oi.buy_counts as buyCounts,
-    oi.price as price
-    from
-    order_items oi
-    where
-    oi.order_id = #{orderId}
-
-  </select>
-
-
-  <select id="queryMyOrdersDoNotUse" resultMap="myOrdersVO" parameterType="Map">
+  <select id="queryMyOrdersDoNoTUse" resultMap="myOrdersVO" parameterType="Map">
     SELECT
-    od.id as orderId,
-    od.created_time as createdTime,
-    od.pay_method as payMethod,
-    od.real_pay_amount as realPayAmount,
-    od.post_amount as postAmount,
-    os.order_status as orderStatus,
-    oi.item_id as itemId,
-    oi.item_name as itemName,
-    oi.item_img as itemImg,
-    oi.item_spec_name as itemSpecName,
-    oi.buy_counts as buyCounts,
-    oi.price as price
+    od.id AS orderId,
+    od.created_time AS createTime,
+    od.pay_method AS payMethod,
+    od.real_pay_amount AS realPayAmount,
+    od.post_amount AS postAmount,
+    os.order_status AS orderStatus,
+    oi.item_id AS itemId,
+    oi.item_name AS itemName,
+    oi.item_img AS itemImg,
+    oi.item_spec_name AS itemSpecName,
+    oi.buy_counts AS buyCounts,
+    oi.price AS price
     FROM
     orders od
     LEFT JOIN
     order_status os
     on od.id = os.order_id
-    LEFT JOIN
-    order_items oi
-    ON od.id = oi.order_id
+    left join order_items oi
+    on od.id=oi.order_id
     WHERE
     od.user_id = #{paramsMap.userId}
     AND
@@ -100,50 +97,4 @@
   </select>
 
 
-  <select id="getMyOrderStatusCounts" parameterType="Map" resultType="int">
-    SELECT
-    count(1)
-    FROM
-    orders o
-    LEFT JOIN
-    order_status os
-    on
-    o.id = os.order_id
-    WHERE
-    o.user_id = #{paramsMap.userId}
-    AND
-    os.order_status = #{paramsMap.orderStatus}
-    <if test="paramsMap.isComment != null">
-      and o.is_comment = #{paramsMap.isComment}
-    </if>
-  </select>
-
-
-  <select id="getMyOrderTrend" parameterType="Map" resultType="com.imooc.pojo.OrderStatus">
-
-    SELECT
-    os.order_id as orderId,
-    os.order_status as orderStatus,
-    os.created_time as createdTime,
-    os.pay_time as payTime,
-    os.deliver_time as deliverTime,
-    os.success_time as successTime,
-    os.close_time as closeTime,
-    os.comment_time as commentTime
-    FROM
-    orders o
-    LEFT JOIN
-    order_status os
-    on
-    o.id = os.order_id
-    WHERE
-    o.is_delete = 0
-    AND
-    o.user_id = #{paramsMap.userId}
-    AND
-    os.order_status in (20, 30, 40)
-    ORDER BY
-    os.order_id
-    DESC
-  </select>
 </mapper>

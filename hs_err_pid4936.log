@@ -1,0 +1,163 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:61), pid=4936, tid=0x000000000000b674
+#
+# JRE version:  (8.0_201-b09) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.201-b09 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002b22800):  JavaThread "Unknown thread" [_thread_in_vm, id=46708, stack(0x0000000002800000,0x0000000002900000)]
+
+Stack: [0x0000000002800000,0x0000000002900000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000002b22800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=46708, stack(0x0000000002800000,0x0000000002900000)]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x00000005c2200000, size: 8158 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x00000007c0000000
+
+Heap:
+ PSYoungGen      total 152576K, used 2621K [0x0000000716100000, 0x0000000720b00000, 0x00000007c0000000)
+  eden space 131072K, 2% used [0x0000000716100000,0x000000071638f5d0,0x000000071e100000)
+  from space 21504K, 0% used [0x000000071f600000,0x000000071f600000,0x0000000720b00000)
+  to   space 21504K, 0% used [0x000000071e100000,0x000000071e100000,0x000000071f600000)
+ ParOldGen       total 348160K, used 0K [0x00000005c2200000, 0x00000005d7600000, 0x0000000716100000)
+  object space 348160K, 0% used [0x00000005c2200000,0x00000005c2200000,0x00000005d7600000)
+ Metaspace       used 786K, capacity 1156K, committed 1408K, reserved 1060864K
+  class space    used 76K, capacity 384K, committed 384K, reserved 1048576K
+
+Card table byte_map: [0x0000000011fe0000,0x0000000012fd0000] byte_map_base: 0x000000000f1cf000
+
+Marking Bits: (ParMarkBitMap*) 0x00000000624f4ce0
+ Begin Bits: [0x0000000014470000, 0x000000001c3e8000)
+ End Bits:   [0x000000001c3e8000, 0x0000000024360000)
+
+Polling page: 0x0000000000740000
+
+CodeCache: size=245760Kb used=328Kb max_used=328Kb free=245431Kb
+ bounds [0x0000000002c20000, 0x0000000002e90000, 0x0000000011c20000]
+ total_blobs=58 nmethods=0 adapters=38
+ compilation: enabled
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.018 loading class java/lang/Short
+Event: 0.018 loading class java/lang/Short done
+Event: 0.018 loading class java/lang/Integer
+Event: 0.018 loading class java/lang/Integer done
+Event: 0.018 loading class java/lang/Long
+Event: 0.018 loading class java/lang/Long done
+Event: 0.019 loading class java/lang/NullPointerException
+Event: 0.019 loading class java/lang/NullPointerException done
+Event: 0.019 loading class java/lang/ArithmeticException
+Event: 0.019 loading class java/lang/ArithmeticException done
+
+
+Dynamic libraries:
+0x00007ff658f00000 - 0x00007ff658f37000 	E:\worktools\jdk8\bin\java.exe
+0x00007ffc399b0000 - 0x00007ffc39ba5000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffc395b0000 - 0x00007ffc3966d000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffc37530000 - 0x00007ffc377f9000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffc38c10000 - 0x00007ffc38cbc000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffc38310000 - 0x00007ffc383ae000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffc38dc0000 - 0x00007ffc38e5c000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffc39780000 - 0x00007ffc398ab000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffc38540000 - 0x00007ffc386e0000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffc37460000 - 0x00007ffc37482000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffc38bd0000 - 0x00007ffc38bfa000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffc37350000 - 0x00007ffc3745b000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffc37490000 - 0x00007ffc3752d000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffc37250000 - 0x00007ffc37350000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffc216e0000 - 0x00007ffc2197a000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.844_none_ca00b6081b84eb1d\COMCTL32.dll
+0x00007ffc380b0000 - 0x00007ffc380e0000 	C:\WINDOWS\System32\IMM32.DLL
+0x0000000062580000 - 0x0000000062651000 	E:\worktools\jdk8\jre\bin\msvcr100.dll
+0x0000000061cd0000 - 0x0000000062574000 	E:\worktools\jdk8\jre\bin\server\jvm.dll
+0x00007ffc38cc0000 - 0x00007ffc38cc8000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffc21f00000 - 0x00007ffc21f09000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffc2ff20000 - 0x00007ffc2ff2a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffc216b0000 - 0x00007ffc216d7000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffc380f0000 - 0x00007ffc3815b000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffc268d0000 - 0x00007ffc268df000 	E:\worktools\jdk8\jre\bin\verify.dll
+0x00007ffc26580000 - 0x00007ffc265a9000 	E:\worktools\jdk8\jre\bin\java.dll
+0x00007ffc24630000 - 0x00007ffc24653000 	E:\worktools\jdk8\jre\bin\instrument.dll
+0x00007ffc268b0000 - 0x00007ffc268c6000 	E:\worktools\jdk8\jre\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dmaven.multiModuleProjectDirectory=E:\lxyWork\foodie_y -Dmaven.home=C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\plugins\maven\lib\maven3 -Dclassworlds.conf=C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\plugins\maven\lib\maven3\bin\m2.conf -Dmaven.ext.class.path=C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\plugins\maven\lib\maven-event-listener.jar -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\lib\idea_rt.jar=10639:C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\bin -Dfile.encoding=UTF-8 
+java_command: org.codehaus.classworlds.Launcher -Didea.version2020.1 -s C:\Users\blueship\.m2\settings_alibaba.xml -DskipTests=true install
+java_class_path (initial): C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2020.1\lib\idea_rt.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=H:\java
+CLASSPATH=.;H:\java\lib\dt.jar;H:\java\lib\tools.jar; 
+PATH=C:\Program Files (x86)\NetSarang\Xftp 7\;C:\Program Files (x86)\NetSarang\Xshell 7\;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\ProgramData\Oracle\Java\javapath1;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\WINDOWS\System32\OpenSSH\;H:\java\bin;H:\java\jre\bin;F:\nodejs\;C:\Program Files\Git\cmd;F:\LxRunOffline-v3.5.0-msvc;C:\Program Files (x86)\Lua\5.1;C:\Program Files (x86)\Lua\5.1\clibs;L:\maven3.6\apache-maven-3.6.3\bin;L:\Program Files\erl-23.0\bin;%CATALINA_HOME%\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Users\blueship\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Bandizip\;E:\Fiddler;C:\Users\blueship\AppData\Roaming\npm;C:\Users\blueship\AppData\Local\Microsoft\WindowsApps;C:\Users\blueship\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\blueship\AppData\Local\GitHubDesktop\bin
+USERNAME=blueship
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 19041 (10.0.19041.804)
+
+CPU:total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 158 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, rtm, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 33407600k(13889276k free), swap 45990512k(6056k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.201-b09) for windows-amd64 JRE (1.8.0_201-b09), built on Dec 15 2018 18:36:39 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Wed Mar 31 13:28:39 2021
+timezone: 中国标准时间
+elapsed time: 0 seconds (0d 0h 0m 0s)
+
